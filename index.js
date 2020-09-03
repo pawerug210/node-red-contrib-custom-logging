@@ -1,5 +1,19 @@
 const fs = require('fs');
 
+function currentDateFormatted() {
+    var d = new Date(),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [day, month, year].join('-');
+}
+
 function fileExists(filepath) {
     fs.access(filepath, fs.F_OK, (err) => {
         if (err) {
@@ -39,7 +53,7 @@ function logHandler(settings) {
         console.log('Succesfully created log directory under ' + logDir);
     });
     return function (msg) {
-        var logFilePath = logDir + new Date().format('d-m-Y') + '.log';
+        var logFilePath = logDir + currentDateFormatted() + '.log';
         var message = `[${(new Date(msg.timestamp)).toISOString()}][${msg.msg}]\n`;
         addLog(logFilePath, message);
     }
