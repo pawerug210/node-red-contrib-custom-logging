@@ -13,7 +13,7 @@ Add new logging to settings.js in main node-red folder.
         console: {
             ...
         },
-        // add ne logger
+        // add new logger
         custom: require("node-red-contrib-custom-logging")
     },
 ```
